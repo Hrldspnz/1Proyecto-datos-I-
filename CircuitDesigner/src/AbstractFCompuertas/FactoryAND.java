@@ -4,17 +4,17 @@ package AbstractFCompuertas;
 public class FactoryAND extends FactoryCompuertas {
 
     @Override
-    ConcreteOR getOR(String tipoOR) {
+    public ConcreteOR getOR(String tipoOR) {
         return null;
     }
 
     @Override
-    ConcreteNOT getNOT() {
+    public ConcreteNOT getNOT() {
         return null;
     }
 
     @Override
-    ConcreteAND getAND(String tipoAND) {
+    public ConcreteAND getAND(String tipoAND) {
         if(tipoAND == null){
             return null;
         }
