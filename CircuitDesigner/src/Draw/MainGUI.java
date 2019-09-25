@@ -121,32 +121,10 @@ public class MainGUI  extends javax.swing.JFrame /*implements MouseListener*/{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new MainGUI().setVisible(true);
+            
         });
     }
 
-   /* @Override
-    public void mouseClicked(MouseEvent e) {
-        
-    }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-        
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        
-    }*/
                  
 }

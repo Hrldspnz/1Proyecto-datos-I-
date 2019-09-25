@@ -23,7 +23,7 @@ public class DrawComp {
     }
     public void Draw(Graphics g){
         g.drawRect(this.x - ancho/2, this.y - largo/2, ancho, largo);
-        g.drawString(Name, x, y);
+        g.drawString(Name, x-10, y);
     }
     
     public String getName(){
