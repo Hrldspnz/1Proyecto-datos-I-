@@ -2,16 +2,29 @@ package Draw;
 
 
 import CircuitList.CompList;
+import CircuitList.Node;
+import static Draw.Lienzo.CalcData;
+import static Draw.Lienzo.vectorNodos;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Vector;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 
 
 
-public class MainGUI  extends javax.swing.JFrame /*implements MouseListener*/{
+public class MainGUI  extends javax.swing.JFrame implements ActionListener {
 
     public CompList CList = new CompList();
     public int index = 0;
+    JButton jButton1 = new javax.swing.JButton();
 
     public MainGUI() {
         initComponents();
@@ -24,17 +37,20 @@ public class MainGUI  extends javax.swing.JFrame /*implements MouseListener*/{
         Lienzo Lnz = new Lienzo();
         Paleta LnzPaleta = new Paleta();
         JLabel jLabel2 = new javax.swing.JLabel();
-        JButton jButton3 = new javax.swing.JButton();
+        
         
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Circuit Designer");
         setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel2.setText("Paleta");
         
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
-        jButton3.setText("Simulate");
+        jButton1.setText("Simulate");
+        jButton1.addActionListener(this);
+        
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -62,7 +78,7 @@ public class MainGUI  extends javax.swing.JFrame /*implements MouseListener*/{
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)        
-                            .addComponent(jButton3)
+                            .addComponent(jButton1)
                             .addComponent(LnzPaleta, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())                 
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -80,7 +96,7 @@ public class MainGUI  extends javax.swing.JFrame /*implements MouseListener*/{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(LnzPaleta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)))
+                        .addComponent(jButton1)))
                 .addGap(27, 27, 27))
         );
 
@@ -103,7 +119,86 @@ public class MainGUI  extends javax.swing.JFrame /*implements MouseListener*/{
         pack();
     }                      
 
+    private void TablaV(){
+        JFrame miniventana;
+        
+        miniventana = new JFrame("Tabla de Verdad");
+        miniventana.setBounds(300, 300, 400, 200);
+        TableModel modeloT = new AbstractTableModel(){
+            @Override
+            public int getRowCount() {
+                return 4;
+            }
 
+            @Override
+            public int getColumnCount() {
+                System.out.println(vectorNodos.size());
+                int cols = vectorNodos.size();
+
+                System.out.println(cols);
+                return cols;
+            }
+
+            @Override
+            public Object getValueAt(int rowIndex, int columnIndex) {
+                if((rowIndex < 2 && columnIndex == 0) || (rowIndex%2 == 0 && columnIndex == 1) ){
+                    return 0;
+                
+                }else if((rowIndex > 1 && columnIndex == 0) || (rowIndex%2 == 1 && columnIndex == 1) ){
+                    return 1;
+                }else if (rowIndex == 0){
+                    vectorNodos.get(0).asNode.setData(0);
+                    vectorNodos.get(1).asNode.setData(0);
+                    CalcOut();
+                    return vectorNodos.get(columnIndex).asNode.getData();
+                }else if (rowIndex == 1){
+                    vectorNodos.get(0).asNode.setData(0);
+                    vectorNodos.get(1).asNode.setData(1);
+                    CalcOut();
+                    vectorNodos.get(1).asNode.setData(1);
+                    return vectorNodos.get(columnIndex).asNode.getData();
+                }else if (rowIndex == 2){
+                    vectorNodos.get(0).asNode.setData(1);
+                    vectorNodos.get(1).asNode.setData(0);
+                    CalcOut();
+                    return vectorNodos.get(columnIndex).asNode.getData();
+                }else {
+                    vectorNodos.get(0).asNode.setData(1);
+                    vectorNodos.get(1).asNode.setData(1);
+                    CalcOut();
+                    return vectorNodos.get(columnIndex).asNode.getData();
+                }
+            }
+            
+            public String getColumnName(int c){
+                return (String) vectorNodos.get(c).asNode.getName();
+            }
+
+        
+        };
+        JTable TablaV = new JTable(modeloT); 
+        miniventana.add(new JScrollPane(TablaV));
+        miniventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        miniventana.setVisible(true);
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == jButton1){
+            JOptionPane.showMessageDialog(rootPane,"El resultado es: "+ CalcOut());
+            this.TablaV();
+        }
+    }
+    
+    public int CalcOut(){
+        Node curr = new Node();
+        curr = vectorNodos.lastElement().getAsNode();
+        curr.setData(CalcData(curr));
+        
+        //System.out.println("El dato es de salida: "+curr.getData());
+        return (int) curr.getData();
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
 
@@ -124,6 +219,8 @@ public class MainGUI  extends javax.swing.JFrame /*implements MouseListener*/{
             
         });
     }
+
+
 
 
                  

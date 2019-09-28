@@ -39,34 +39,28 @@ public class CompList {
             if(TypeComp.equalsIgnoreCase("OR")){
                   ConcreteOR OR = ORFactory.getOR("OR");
                   num = OR.operacion(in1, in2);
-                  ContORS++;
             
             }else if(TypeComp.equalsIgnoreCase("NOR")){
                   ConcreteOR NOR = ORFactory.getOR("NOR");
                   num =  NOR.operacion(in1, in2);
-                  ContNORS++;
                   
             }else if(TypeComp.equalsIgnoreCase("XOR")){
                   ConcreteOR XOR = ORFactory.getOR("XOR");
                   num =  XOR.operacion(in1, in2);
-                  ContXORS++;
             
             }else if(TypeComp.equalsIgnoreCase("XNOR")){
                   ConcreteOR XNOR = ORFactory.getOR("XNOR");
                   num =  XNOR.operacion(in1, in2);
-                  ContXNORS++;
             }
         }else if(Compuerta.equalsIgnoreCase("AND")){
             FactoryCompuertas ANDFactory = ProducerCompuertas.getFactory("AND");
             if(TypeComp.equalsIgnoreCase("AND")){
                   ConcreteAND AND = ANDFactory.getAND("AND");
                   num =  AND.operacion(in1, in2);
-                  ContANDS++;
                   
             }else if(TypeComp.equalsIgnoreCase("NAND")){
                   ConcreteAND NAND = ANDFactory.getAND("NAND");
                   num =  NAND.operacion(in1, in2);
-                  ContNANDS++;
             }      
             
         }else{
@@ -74,7 +68,6 @@ public class CompList {
             
               ConcreteNOT NOT = NOTFactory.getNOT();
               num =  NOT.Invertir(in1);
-              ContNOTS++;
         }
         
         return num;
@@ -101,19 +94,33 @@ public class CompList {
             this.head = Comp;
             switch(tipoComp){
                 case "NOT": this.head.setName(tipoComp + ContNOTS);
+                            ContNOTS++;
                             this.head.setTypes(Compuerta, tipoComp); break;
-                case "OR":  this.head.setName(tipoComp + ContORS); 
+                    
+                case "OR":  this.head.setName(tipoComp + ContORS);
+                            ContORS++;
                             this.head.setTypes(Compuerta, tipoComp); break;
-                case "NOR": this.head.setName(tipoComp + ContNORS); 
+                    
+                case "NOR": this.head.setName(tipoComp + ContNORS);
+                            ContNORS++;
                             this.head.setTypes(Compuerta, tipoComp); break;
+                    
                 case "XOR": this.head.setName(tipoComp + ContXORS); 
+                            ContXORS++;
                             this.head.setTypes(Compuerta, tipoComp); break;
+                    
                 case "XNOR": this.head.setName(tipoComp + ContXNORS); 
+                            ContXNORS++;
                             this.head.setTypes(Compuerta, tipoComp); break;
+                    
                 case "AND": this.head.setName(tipoComp + ContANDS); 
+                            ContANDS++;
                             this.head.setTypes(Compuerta, tipoComp); break;
+                    
                 case "NAND": this.head.setName(tipoComp + ContNANDS); 
+                            ContNANDS++;
                             this.head.setTypes(Compuerta, tipoComp); break;
+                    
                 default: this.head.setName(null); break;
             }
 
@@ -148,20 +155,34 @@ public class CompList {
                 act = act.getNext();
                 
                 switch(tipoComp){
-                    case "NOT": act.setName(tipoComp + ContNOTS); 
+                    case "NOT": act.setName(tipoComp + ContNOTS);
+                                ContNOTS++;
                                 act.setTypes(Compuerta, tipoComp); break;
+                        
                     case "OR": act.setName(tipoComp + ContORS); 
+                               ContORS++;
                                act.setTypes(Compuerta, tipoComp); break;
+                        
                     case "NOR": act.setName(tipoComp + ContNORS);
+                                ContNORS++;
                                 act.setTypes(Compuerta, tipoComp); break;
+                        
                     case "XOR": act.setName(tipoComp + ContXORS); 
+                                ContXORS++;
                                 act.setTypes(Compuerta, tipoComp); break;
+                        
                     case "XNOR": act.setName(tipoComp + ContXNORS);
+                                ContXNORS++;
                                 act.setTypes(Compuerta, tipoComp); break;
+                        
                     case "AND": act.setName(tipoComp + ContANDS); 
+                                ContANDS++;
                                 act.setTypes(Compuerta, tipoComp); break;
+                        
                     case "NAND": act.setName(tipoComp + ContNANDS); 
+                                ContNANDS++;
                                 act.setTypes(Compuerta, tipoComp); break;
+                        
                     default: act.setName(null); break;
                 
                 }          
