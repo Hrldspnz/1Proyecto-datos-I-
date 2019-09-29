@@ -5,8 +5,10 @@ import java.awt.Graphics;
 
 
 /**
- *
- * @author Harold
+ * Clase que contiene las compuertas dibujadas y sus datos asosiados
+ * @author Harold Espinoza M.
+ * @version 1.2
+ * 
  */
 public class DrawComp {
     private int x, y;
@@ -15,6 +17,14 @@ public class DrawComp {
     public static final int ancho = 51;
     public static final int largo = 26;
     
+    /**
+     * Constructor de la clase para el dibujado de las compuertas
+     * @param x Entero con la poscicion en el eje x de la compuerta
+     * @param y Entero con la poscicion en el eje y de la compuerta
+     * @param AsNode Nodo asosiado de la lista dobleenlazada de compuertas
+     * @param name Nombre de la compuerta
+     * @author Harold Espinoza M.
+     */
     public DrawComp(int x, int y, Node AsNode, String name){
         this.x = x;
         this.y = y;
@@ -22,6 +32,11 @@ public class DrawComp {
         this.asNode = AsNode;
     }
     
+    /**
+     * Metodo que dibuja la compuerta junto con su nombre
+     * @author Harold Espinoza M.
+     * @param g recibe una instancia de la clase graphics
+     */
     public void Draw(Graphics g){
         g.drawRect(this.x - ancho/2, this.y - largo/2, ancho, largo);
         g.drawString(Name, x-10, y);

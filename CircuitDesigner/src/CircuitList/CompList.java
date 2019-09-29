@@ -13,11 +13,21 @@ import static CircuitList.Node.ContORS;
 import static CircuitList.Node.ContXNORS;
 import static CircuitList.Node.ContXORS;
 
+/**
+ * Clase de la lista doblemente enlazada para contener las compuertas y creacion del circuito 
+ * @author Harold Espinoza M.
+ * @version 1.2
+ */
+
 public class CompList {
    
     private Node head;
     private int size;
     
+    /**
+     * Constructor de la clase que crea la lista
+     * @author Harold Espinoza M.
+     */
     public CompList() {
         this.head = null;
         this.size = 0;
@@ -31,6 +41,15 @@ public class CompList {
         return this.size;
     }
     
+    /**
+     * Metodo para calcular la salida de la compuerta, para ello accede a la fabrica de compuertas para realizar la operacion 
+     * @param Compuerta Solicita un String con el tipo de compuerta a la que pertence ya sea AND, OR, NOT
+     * @param TypeComp String que debe contener el subtipo especifico de la compuerta(AND, NAND, OR, NOR, XOR, XNOR, NOT)
+     * @param in1 Entero con la primer entrada de la compuerta
+     * @param in2 Entero con la segunda entrada de la compuerta
+     * @return El metodo retorna un entero con el resultado de la operacion realizada por la compuerta, es decir la salida de la compuerta
+     * @author Harold Espinoza M.
+     */
     public static int Calculo(String Compuerta, String TypeComp, int in1,int in2) {
         int num;
         num = 0;
@@ -74,6 +93,12 @@ public class CompList {
          
     } 
     
+    /**
+     * Metodo que busca un elemento dentro de la lista enlazada
+     * @param ind Entero que contiene la posciocion donde se encuentra el elemento dentro de la lista
+     * @return El metodo retorna el nodo en la poscicion solicitada 
+     * @author Harold Espinoza M.
+     */
     public Node Search(int ind){
         int SIndex = 0;
         Node currNode = this.head;
@@ -85,7 +110,13 @@ public class CompList {
         return currNode;
     
     }
-
+    
+    /**
+     * Metodo que inserta una compuerta en la lista enlzada 
+     * @param Compuerta String que contiene la familia a la que pertenece la compuerta(AND, OR, NOT)
+     * @param tipoComp String con el tipo especifico de la compuerta
+     * @author Harold Espinoza M.
+     */
     public void insertarComp(String Compuerta,String tipoComp){
         
         Node Comp = new Node();
@@ -193,6 +224,12 @@ public class CompList {
         
     }
     
+    /**
+     * Metodo que inserta una señal a la lista enlazada 
+     * @param name String con el nombre de la señal
+     * @param signal Entero con la señal que contiene ya sea 1 o 0
+     * @author Harold Espinoza M.
+     */
     public void insertarSignal(String name, int signal){
         
         Node Comp = new Node();
@@ -219,6 +256,10 @@ public class CompList {
         this.size++;
     } 
     
+    /**
+     * Metodo que saca cada elemento de la lista para mostrar su resultado
+     * @author Harold Espinoza M.
+     */
     public void displayList() {
         Node current = this.head;
         while (current != null) {

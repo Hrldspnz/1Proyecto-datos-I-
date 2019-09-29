@@ -7,7 +7,6 @@ import static Draw.Lienzo.CalcData;
 import static Draw.Lienzo.vectorNodos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -19,17 +18,30 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
 
-
+/**
+ * Clase encargada de crear la ventana y añadir los paneles  
+ * Hereda de JFrame e implementa ActionListener
+ * @author Harold Espinoza M.
+ */
 public class MainGUI  extends javax.swing.JFrame implements ActionListener {
 
     public CompList CList = new CompList();
     public int index = 0;
     JButton jButton1 = new javax.swing.JButton();
-
+    
+    /**
+     * Constructor que inicia los componentes necesarios
+     * @author Harold Espinoza M.
+     */
     public MainGUI() {
         initComponents();
     }
     
+    /**
+     * Metodo que crea la ventana, añade los paneles y un boton
+     * Creada utilizando la herramienta de edicion de ventanas de NetBeans
+     * @author Harold Espinoza M.
+     */
     private void initComponents() {
 
         JPanel jPanel1 = new javax.swing.JPanel();
@@ -119,26 +131,41 @@ public class MainGUI  extends javax.swing.JFrame implements ActionListener {
         pack();
     }                      
 
+    /**
+     * Metodo ecagado de crear la tabla de verdad del circuito
+     * Crea una ventana y en ella añade una tabla que va calculando el dato de las compuertas para cada caso
+     * @author Harold Espinoza M.
+     */
     private void TablaV(){
         JFrame miniventana;
         
         miniventana = new JFrame("Tabla de Verdad");
         miniventana.setBounds(300, 300, 400, 200);
         TableModel modeloT = new AbstractTableModel(){
+            
+            /**
+             * Metodo sobreescrito que define la cantidad de filas de la tabla
+             * @author Harold Espinoza M.
+             */
             @Override
             public int getRowCount() {
                 return 4;
             }
 
+            /**
+             * Metodo sobreescrito que define la contidad de columnas dependiendo de la cantidad de elementos que tenga la lista
+             * @author Harold Espinoza M.
+             */
             @Override
             public int getColumnCount() {
-                System.out.println(vectorNodos.size());
                 int cols = vectorNodos.size();
-
-                System.out.println(cols);
                 return cols;
             }
 
+            /**
+             * Se sobreescribe el metodo para calcular los datos de la compuerta en cada caso de entrada
+             * @author Harold Espinoza M.
+             */
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
                 if((rowIndex < 2 && columnIndex == 0) || (rowIndex%2 == 0 && columnIndex == 1) ){
@@ -170,6 +197,10 @@ public class MainGUI  extends javax.swing.JFrame implements ActionListener {
                 }
             }
             
+            /**
+             * Metodo que se sobreescribe para dar un nombre a cada columna, este sera dado por el nombre de cada elemento de la lista
+             * @author Harold Espinoza M.
+             */
             public String getColumnName(int c){
                 return (String) vectorNodos.get(c).asNode.getName();
             }
@@ -182,6 +213,11 @@ public class MainGUI  extends javax.swing.JFrame implements ActionListener {
         miniventana.setVisible(true);
     }
     
+    /**
+     * Se sobreescribe el metodo para definir las acciones del boton
+     * Al dar click en el boton aparece una ventana con el resultado final del circuito, luego llama a la ventana con la tabla de verdad del circuito
+     * @author Harold Espinoza M.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == jButton1){
@@ -190,6 +226,11 @@ public class MainGUI  extends javax.swing.JFrame implements ActionListener {
         }
     }
     
+    /**
+     * Este metodo calcula la salida final del circuito, para ello llama al metodo CalcData pasandole como parametro el ultimo elemento de la lista doble enlazada
+     * @return Se devuelve un etntero con el resultado final del circuito
+     * @author Harold Espinoza M.
+     */
     public int CalcOut(){
         Node curr = new Node();
         curr = vectorNodos.lastElement().getAsNode();
@@ -197,7 +238,12 @@ public class MainGUI  extends javax.swing.JFrame implements ActionListener {
         
         return (int) curr.getData();
     }
-    
+
+    /**
+     * Metodo main para la ejecucion del programa
+     * @author Harold Espinoza M.
+     * @param args
+     */
     public static void main(String args[]) {
 
         try {

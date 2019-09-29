@@ -1,5 +1,9 @@
 package CircuitList;
-
+/**
+ * Esta clase crea el nodo para ser utilizado en la lista enlazada 
+ * @author Harold Espinoza M.
+ * @version 1.2
+ */
 public class Node {
     private Object data;
     private Object name;
@@ -15,7 +19,11 @@ public class Node {
     public static int ContXORS  = 0;
     public static int ContXNORS  = 0;
     public static int ContNOTS  = 0;
-
+    
+    /**
+     * Constructor que inicializa el nodo 
+     */
+    
     public Node() {
         this.next = null;
         this.data = null;

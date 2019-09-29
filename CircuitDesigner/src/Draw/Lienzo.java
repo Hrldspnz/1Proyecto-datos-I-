@@ -18,8 +18,9 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Clase del panel para el dibujado y manipulacion de las compuertas que implemeta MouseListener, MouseMotionListener para la deteccion de lo que hace el mouse
  * @author Harold
+ * @version 1.2
  */
 public class Lienzo extends JPanel implements MouseListener, MouseMotionListener {
     public static Vector<DrawComp> vectorNodos;
@@ -32,7 +33,10 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
     private Node tempAs;
     public static int Ndata = 0;
          
-    
+    /**
+     * Constructor de la clase que inicia los parametros necesarios
+     * @author Harold Espinoza M.
+     */
     public Lienzo(){
         vectorNodos = new Vector<>();
         this.vectorLineas = new Vector<>();
@@ -40,7 +44,12 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
         this.addMouseMotionListener(this);
         
     }
-    
+
+    /**
+     * Metodo que se encarga de pintar todas las compuertas y las lineas de conexion
+     * utiliza el metodo padre de la clase graphics 
+     * @author Harold Espinoza M.
+     */
     public void paint(Graphics g){
         super.paint(g);
         for (DrawComp nodos: vectorNodos){
@@ -54,6 +63,12 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
         repaint();
     }
     
+    /**
+     * Metodo de recurcion que realiza el el calculo de la compuerta solicitada
+     * Para ello calcula el dato de las compuertas conectdas a ella y luego calcula su dato
+     * @param comp Nodo con la compuerta que se desea calcular el resultado
+     * @return Devuelve un entero con el dato final de la compuerta
+     */
     public static int CalcData(Node comp){
         if(comp.prev1.getType() != "Signal"){
             comp.prev1.setData(CalcData(comp.prev1));
@@ -69,9 +84,15 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
         }                 
         
         return Ndata;
-        
     }
     
+    /**
+     * Se sobreescribe el metod de mouseClicked para realizar diferentes acciones deendiendo del click en el mouse
+     * Con el Click derecho si se tiene una compuerta seleccionada de la paaleta puede colocar una compuerta, en caso de no tener una compuerta si se da click sobre una señal permite cambiar el nombre o su señal
+     * Con el Click izquierdo sobre una compuerta o señal se permite crear lineas de conccion para ello se da click izquierdo primero sobre la salida de la compuerta que se desea conectar a la entrada de otra luego sobre la segunda compuerta
+     * @param e Recibe como parametro los eventos del mouse
+     * @author Harold Espinoza M.
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getButton() == MouseEvent.BUTTON3){
@@ -207,6 +228,11 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
         }
     }
 
+    /**
+     * Metodo sobreescrito para definir que sucede en caso de presionar un boton del mouse
+     * En este caso se utiliza para mover una compuerta, si el mouse esta encima de una compuerta guarda esta en una variable 
+     * @author Harold Espinoza M.
+     */
     @Override
     public void mousePressed(MouseEvent e) {
        
@@ -223,6 +249,11 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
        }
     }
 
+    /**
+     * Metodo sobreescrito para definir las acciones cunado se suelta un boton del mouse
+     * En este caso se reinician las variables usadas para mover la compuerta
+     * @author Harold Espinoza M.
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
         MovComp = null;
@@ -240,6 +271,11 @@ public class Lienzo extends JPanel implements MouseListener, MouseMotionListener
        
     }
 
+    /**
+     * Se sobreescribe el metodo para cuando se arrastra el mouse
+     * Si las variables contienen una compuerta la mueven a la posicion en la que mouse se encuentre es decir la arrastra con el
+     * Si la compuerta contiene una linea entonces la mueve tambien
+     */
     @Override
     public void mouseDragged(MouseEvent e) {
         if(MovComp != null){
