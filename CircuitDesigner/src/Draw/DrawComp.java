@@ -21,6 +21,7 @@ public class DrawComp {
         this.Name = name;
         this.asNode = AsNode;
     }
+    
     public void Draw(Graphics g){
         g.drawRect(this.x - ancho/2, this.y - largo/2, ancho, largo);
         g.drawString(Name, x-10, y);
@@ -37,8 +38,7 @@ public class DrawComp {
     public Node getAsNode(){
         return asNode;
     }    
-    
-    
+        
     public int getX(){
         return x;
     }

@@ -195,12 +195,10 @@ public class MainGUI  extends javax.swing.JFrame implements ActionListener {
         curr = vectorNodos.lastElement().getAsNode();
         curr.setData(CalcData(curr));
         
-        //System.out.println("El dato es de salida: "+curr.getData());
         return (int) curr.getData();
     }
     
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
 
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -213,15 +211,11 @@ public class MainGUI  extends javax.swing.JFrame implements ActionListener {
             java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new MainGUI().setVisible(true);
             
         });
     }
-
-
-
 
                  
 }

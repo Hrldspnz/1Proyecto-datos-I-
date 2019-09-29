@@ -1,11 +1,5 @@
 package CircuitList;
 
-/*import AbstractFCompuertas.ConcreteAND;
-import AbstractFCompuertas.ConcreteNOT;
-import AbstractFCompuertas.ConcreteOR;
-import AbstractFCompuertas.FactoryCompuertas;
-import AbstractFCompuertas.ProducerCompuertas;*/
-
 public class Node {
     private Object data;
     private Object name;
